@@ -1,4 +1,3 @@
-https://github.com/ahsan-lgtm/password-strength-checker/blob/9b12bfde14b58376510e48d8dac5330f5157743a/PassChecker.png
 # password-strength-checker
 A comprehensive cybersecurity tool that evaluates password security using entropy analysis, pattern detection, crack-time estimation, and real-time feedback.
 
