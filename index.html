@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Password Strength Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="icon">&#128737;</span>
+                <h1>Password Strength Analyzer</h1>
+            </div>
+            <p class="subtitle">Advanced cybersecurity tool for password security assessment</p>
+        </header>
+
+        <div class="main-panel">
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <input type="text" id="passwordInput" placeholder="Type password to analyze..." autocomplete="off" spellcheck="false">
+                    <button id="toggleVisibility" class="toggle-btn" title="Toggle visibility">&#128065;</button>
+                    <button id="clearBtn" class="clear-btn" title="Clear">&#10005;</button>
+                </div>
+                <div class="strength-meter-container">
+                    <div class="strength-meter">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-indicators">
+                        <span id="strengthLabel" class="strength-label">No Password</span>
+                        <span id="scoreDisplay" class="score-display">0/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3><span class="card-icon">&#9889;</span> Entropy</h3>
+                    <div class="card-value" id="entropyValue">0.00</div>
+                    <div class="card-sub" id="entropyLabel">bits</div>
+                </div>
+                <div class="result-card">
+                    <h3><span class="card-icon">&#9200;</span> Crack Time</h3>
+                    <div class="card-value" id="crackTimeValue">Instant</div>
+                    <div class="card-sub" id="crackTimeLabel">at 10B/s</div>
+                </div>
+                <div class="result-card">
+                    <h3><span class="card-icon">&#128272;</span> Key Space</h3>
+                    <div class="card-value" id="keySpaceValue">0</div>
+                    <div class="card-sub" id="keySpaceLabel">possible combinations</div>
+                </div>
+                <div class="result-card">
+                    <h3><span class="card-icon">&#128200;</span> Complexity</h3>
+                    <div class="card-value" id="complexityValue">Very Weak</div>
+                    <div class="card-sub" id="complexityLabel">risk level</div>
+                </div>
+            </div>
+
+            <div class="details-panel">
+                <div class="criteria-section">
+                    <h2>Security Criteria</h2>
+                    <ul id="criteriaList">
+                        <li class="criteria-item" data-criteria="length">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">At least 12 characters</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="uppercase">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">Uppercase letter</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="lowercase">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">Lowercase letter</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="digits">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">Digit</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="special">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">Special character</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="noCommon">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">Not a common password</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="noPattern">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">No predictable patterns</span>
+                        </li>
+                        <li class="criteria-item" data-criteria="entropy">
+                            <span class="criteria-icon">&#9675;</span>
+                            <span class="criteria-text">High entropy (>= 60 bits)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feedback-section">
+                    <h2>Feedback &amp; Suggestions</h2>
+                    <div id="feedbackList" class="feedback-list"></div>
+                </div>
+            </div>
+
+            <div class="character-analysis">
+                <h2>Character Distribution</h2>
+                <div class="char-bars" id="charBars">
+                    <div class="char-bar-item">
+                        <span class="char-label">Uppercase</span>
+                        <div class="char-bar-track"><div class="char-bar-fill" id="upperBar"></div></div>
+                        <span class="char-count" id="upperCount">0</span>
+                    </div>
+                    <div class="char-bar-item">
+                        <span class="char-label">Lowercase</span>
+                        <div class="char-bar-track"><div class="char-bar-fill" id="lowerBar"></div></div>
+                        <span class="char-count" id="lowerCount">0</span>
+                    </div>
+                    <div class="char-bar-item">
+                        <span class="char-label">Digits</span>
+                        <div class="char-bar-track"><div class="char-bar-fill" id="digitBar"></div></div>
+                        <span class="char-count" id="digitCount">0</span>
+                    </div>
+                    <div class="char-bar-item">
+                        <span class="char-label">Special</span>
+                        <div class="char-bar-track"><div class="char-bar-fill" id="specialBar"></div></div>
+                        <span class="char-count" id="specialCount">0</span>
+                    </div>
+                    <div class="char-bar-item">
+                        <span class="char-label">Other</span>
+                        <div class="char-bar-track"><div class="char-bar-fill" id="otherBar"></div></div>
+                        <span class="char-count" id="otherCount">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extra-tools">
+                <div class="tool-section generator-section">
+                    <h2>&#128161; Password Generator</h2>
+                    <div class="generator-controls">
+                        <label><input type="checkbox" id="genUpper" checked> A-Z</label>
+                        <label><input type="checkbox" id="genLower" checked> a-z</label>
+                        <label><input type="checkbox" id="genDigits" checked> 0-9</label>
+                        <label><input type="checkbox" id="genSpecial" checked> !@#$</label>
+                        <label>
+                            Length:
+                            <input type="number" id="genLength" value="20" min="8" max="128">
+                        </label>
+                        <button id="generateBtn" class="btn primary">Generate</button>
+                        <button id="copyBtn" class="btn secondary">Copy</button>
+                    </div>
+                    <div class="generated-password" id="generatedPassword">Click Generate</div>
+                </div>
+                <div class="tool-section history-section">
+                    <h2>&#128337; Check History</h2>
+                    <div id="historyList" class="history-list">
+                        <span class="empty-history">No history yet</span>
+                    </div>
+                    <button id="clearHistoryBtn" class="btn danger small">Clear History</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Advanced Password Strength Analyzer &mdash; Cybersecurity Tool</p>
+        </footer>
+    </div>
+
+    <script src="checker.js"></script>
+</body>
+</html>
