@@ -1,5 +1,6 @@
-# password-strength-checker
+# Password-strength-checker
 A comprehensive cybersecurity tool that evaluates password security using entropy analysis, pattern detection, crack-time estimation, and real-time feedback.
+![Image Alt[](](https://github.com/ahsan-lgtm/password-strength-checker/blob/a8d86291104197317d60f27ed8727570145a0259/PassChecker.png)
 
 - **Password Generator** — Cryptographically secure random passwords with configurable character sets and length (8–128)
 - **Check History** — Last 20 analyses saved locally; click any entry to re-analyze
